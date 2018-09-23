@@ -1,0 +1,17 @@
+/WebService/TransMonitorData.asmx?op=TransTotalStaCfgToLinuxClient
+/siteserver/
+/inc/uploadfile.aspx
+/Coordinate/
+/systestcomjun/
+/systestcomjun/Login.aspx
+/modules/ads/
+/livefiles/pages/inner/userlist.aspx
+/dwr/test/DWRSearchUserService
+/cgi-bin/test-cgi
+/crossdomain.xml
+/portaladmin/
+/infoadmin/
+/infoadmin/management/
+/inc/uploadfile.aspx
+/web1/upload_Photo.asp
+/ckeditor/browse/?CKEditor=id_content&CKEditorFuncNum=0&langCode=zh-cn
