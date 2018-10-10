@@ -1,8 +1,9 @@
 # dirscan
 
-*自用目录扫描器、支持单个网站和批量
-*之后有空再增加爬目录生成字典功能，计划使用selenium+phantomjs解析动态js
-*增加python3支持
+* 自用目录扫描器、支持单个网站和批量
+* 之后有空再增加爬目录生成字典功能，计划使用selenium+phantomjs解析动态js
+* 增加python3支持
+
 ```
 dirscan Jaqen$ dirscan
 
