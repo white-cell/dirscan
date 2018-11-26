@@ -6,7 +6,9 @@ import re
 import threading
 import logging
 import queue
+import time
 from lxml import html
+from lib.termcolor import colored
 
 good_proxy = []
 cache_proxy = []
@@ -23,7 +25,7 @@ def get_proxy1():
         for proxy in result:
             proxy_queue.put(proxy)
 def get_proxy2():
-    for i in range(1,10):
+    for i in range(1,20):
         url = 'https://www.kuaidaili.com/free/inha/%s/'%i
         try:
             resp = requests.get(url)
@@ -43,10 +45,10 @@ def _fecth(test_url):
         "headers": {
             "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:56.0) Gecko/20100101 Firefox/56.0",
         },
-        "timeout": 3
+        "timeout": 3,
+        "allow_redirects":False
     }
     while not proxy_queue.empty():
-        print('.',end="")
         proxy = proxy_queue.get()
         cache_proxy.append(proxy)
         kwargs["proxies"] = {"http": proxy, "https": proxy}
@@ -55,6 +57,12 @@ def _fecth(test_url):
         except:
             continue
         if resp.status_code == 200:
+            # try:
+            #     resp = requests.get(test_url, **kwargs)
+            # except:
+            #     continue
+            print(colored("[%s] proxy pool add %s" % (time.strftime('%H:%M:%S', time.localtime(time.time())),proxy), 'yellow'))
+            # if resp.status_code == 302:
             with threading.Lock():
                 good_proxy.append(proxy)
 def save_cache():

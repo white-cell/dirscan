@@ -5,7 +5,6 @@
 import os
 import sys
 import time
-import urllib
 import threading
 import logging
 import lib.requests as requests
@@ -57,10 +56,11 @@ class my_thread(threading.Thread):
             kwargs = {"timeout":config['timeout'], "headers":{"User-Agent": random.choice(
                     config['USER_AGENTS'])}, "allow_redirects":config['allow_redirects'], "verify":False}
             if config['proxy_flag']:
-                if len(config['proxy_list']) > 10:
+                if len(config['proxy_list']) > 5:
                     kwargs["proxies"] = {"http": random.choice(config['proxy_list']), "https": random.choice(config['proxy_list'])}
                 else:
                     output("get useful proxy too less,keep real IP!",'red')
+                    config['proxy_flag'] = False
             # print url
             try:
                 resp = requests.get(url, **kwargs)
@@ -109,13 +109,23 @@ def output(info, color='white', on_color=None, attrs=None):
 
 # 加载字典
 def load_dict():
+    dic = list(os.walk('./dic/'))[0][2]
     if "," in sys.argv[2]:
         dict_list = sys.argv[2].split(",")
         for d in dict_list:
-            Queue_push("./dic/%s.txt" % d)
+            if d+'.txt' in dic:
+                Queue_push("./dic/%s.txt" % d)
+            else:
+                output('dicname error','red')
+                print('\n[*] shutting down at %s\n' % time.strftime('%H:%M:%S', time.localtime(time.time    ())))
+                exit()
     else:
-        Queue_push("./dic/%s.txt" % sys.argv[2])
-
+        if sys.argv[2]+'.txt' in dic:
+            Queue_push("./dic/%s.txt" % sys.argv[2])
+        else:
+            output('dicname error','red')
+            print('\n[*] shutting down at %s\n' % time.strftime('%H:%M:%S', time.localtime(time.time    ())))
+            exit()
 
 # 整理定制字典未完成
 def load_customize_dic():
@@ -149,7 +159,7 @@ def dirscan(domain):
         output("%s connect fail!" % domain, 'red')
         return
     output('Starting scan target:%s' % domain, 'green')
-    if res.status_code in [200, 301, 302, 401, 403, 404]:
+    if res.status_code:
         output(domain+" "+str(res.status_code))
         # 取头信息
         if 'Server' in dict(res.headers):
@@ -206,15 +216,15 @@ if __name__ == "__main__":
     else:
         print('\n[*] starting at %s\n' % time.strftime('%H:%M:%S', time.localtime(time.time())))
         load_dict()
-        # 代理ip质量太差，影响扫描结果
-        # if  input("Use proxy pool?[y/n]").lower() != 'n':
-        #     config['proxy_flag'] = True
+        #代理ip质量太差，影响扫描结果
+        if  input(colored("[%s] Use proxy pool?[y/N]" %time.strftime('%H:%M:%S', time.localtime(time.time())), 'green')).lower() == 'y':
+            config['proxy_flag'] = True
         if ".ini" in sys.argv[1]:
             try:
                 with open(sys.argv[1], 'r') as HostList:
                     List = HostList.readlines()
-                    output("threadNum=%d  dirNum=%d targetNum=%s" % (
-                        config['NUM'], config['workQueue'].qsize(), len(List)), "green")
+                    output("threadNum=%d  dirNum=%d targetNum=%s proxy_mode=%s" % (
+                        config['NUM'], config['workQueue'].qsize(), len(List), config['proxy_flag']), "green")
                     for i in List:
                         if config['workQueue'].qsize() == 0:
                             load_dict()
