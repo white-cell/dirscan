@@ -6,7 +6,7 @@
 * 增加建立代理池功能
 
 ```
-dirscan Jaqen$ dirscan
+dirscan Jaqen$ python3 dirscan-py3.py
 
      _   _          ____
   __| | (_)  _ __  / ___|  ___ __ _ _ __
@@ -15,11 +15,11 @@ dirscan Jaqen$ dirscan
  \__,_| |_| |_|    |____/ \___\__,_|_| |_| 
  
 
-Usage: python dirscan.py http://www.xxxx.com dicname,dicname
+Usage: python3 dirscan-py3.py http://www.xxxx.com dicname,dicname
 
-       python dirscan.py host.ini dicname,dicname
+       python3 dirscan-py3.py host.ini dicname,dicname
 
-example: python dirscan.py https://www.baidu.com common,php-small
+example: python3 dirscan-py3.py https://www.baidu.com common,php-small
 DIC LIST: ['discuz.txt', 'asp-super.txt', 'jeesite.txt', 'aspx-big.txt', 'editor.txt', 'txt.txt', 'hanweb.txt', 'beifen.txt', 'xheditor.txt', 'jsp-small.txt', 'php-small.txt', 'common.txt', 'jsp-big.txt', 'asp-small.txt', 'asp-big.txt', 'fck.txt', 'test.txt', 'dir-big.txt', 'php-super.txt', 'aspx-small.txt', 'other.txt', 'ashx.txt', 'wsdl.txt', 'php-big.txt', 'html.txt', 'ecshop.txt']
 ```
 # 代理功能
@@ -29,4 +29,6 @@ DIC LIST: ['discuz.txt', 'asp-super.txt', 'jeesite.txt', 'aspx-big.txt', 'editor
 * 使用可用的代理地址进行代理扫描。
 
 # 运行
+* pip install requests lxml
+
 ![](https://github.com/white-cell/dirscan/blob/master/1.jpg)

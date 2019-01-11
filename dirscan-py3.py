@@ -34,7 +34,7 @@ config = {'lock': threading.Lock(),
     "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.8) Gecko Fedora/1.9.0.8-1.fc10 Kazehakase/0.5.6",
     "Opera/9.80 (Macintosh; Intel Mac OS X 10.6.8; U; fr) Presto/2.9.168 Version/11.52", ],
     'customize_flag': 'n', #自定义字典标识位
-    '404': [ "Default.aspx","<title>404</title>", "<title>Error</title>", "<h3>TRACE</h3>", "This page can't be displayed", "HR noShade SIZE", "/error", "HTTP404", "404.aspx", "404 Not Found", "404.css", "404.png", "Your request is blocked", "mailto:anquan@jd.com"],  # 自定义404
+    '404': [ "The requested URL was rejected. Please consult with your administrator","javascript:Relogin()","Default.aspx","<title>404</title>", "<title>Error</title>", "<h3>TRACE</h3>", "This page can't be displayed", "HR noShade SIZE", "/error", "HTTP404", "404.aspx", "404 Not Found", "404.css", "404.png", "Your request is blocked", "mailto:anquan@jd.com"],  # 自定义404
     'firewall': ["safedog", "365cyd"], #防护设备
     'firewall-flag':False, #防护设备阻断标志
     'result_list': [],
@@ -86,7 +86,7 @@ class my_thread(threading.Thread):
                         f = 500
                         output("[%d] %s" % (resp.status_code, url), 'red')
                     if f == 200 and url not in config['result_list']:
-                        output("[%d] %s" % (resp.status_code, url),
+                        output("[%d] %s [lenth:%s]" % (resp.status_code, url, len(resp.text)),
                                'white', attrs=['bold'])
                         config['result_list'].append(url)
 
@@ -196,9 +196,9 @@ def dirscan(domain):
 
 
 def usage():
-    print("\nUsage: python dirscan.py http://www.xxxx.com dicname,dicname\n")
-    print("       python dirscan.py host.ini dicname,dicname\n")
-    print("example: python dirscan.py https://www.baidu.com common,php-small")
+    print("\nUsage: python3 dirscan-py3.py http://www.xxxx.com dicname,dicname\n")
+    print("       python3 dirscan-py3.py host.ini dicname,dicname\n")
+    print("example: python3 dirscan-py3.py https://www.baidu.com common,php-small")
     print("DIC LIST: "+colored(list(os.walk('./dic/'))[0][2], 'green'))
 
 
